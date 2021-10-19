@@ -2,6 +2,7 @@
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
+render_mode shadows_disabled, cull_disabled;
 
 uniform vec4 lightning_color: hint_color;
 uniform vec4 emission_color: hint_color;
