@@ -2,6 +2,7 @@ tool
 
 extends Path
 
+export(String, "Plane", "Curved") var lightning_mode = "Plane"
 export var bake : bool = false setget set_bake
 export var lightning_material : Material = preload("res://Lightning3D.tres")
 export var meshs : Array
@@ -39,8 +40,12 @@ func creates_meshs():
 		var origin : Vector3 = curve.get_point_position(index_point)
 		var extremity : Vector3 = curve.get_point_position(index_point+1)
 	
-		
-		create_plane_mesh(origin, extremity)
+		match lightning_mode:
+			"Plane":
+				create_plane_mesh(origin, extremity)
+			
+			"Curved":
+				pass
 		
 func clean_meshs():
 	for mesh in meshs:
