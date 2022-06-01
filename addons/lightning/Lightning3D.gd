@@ -4,8 +4,8 @@ extends Path
 
 export(String, "Plane", "Curved") var lightning_mode = "Plane"
 export var bake : bool = false setget set_bake
-export var lightning_material : Material = preload("res://Lightning3D.tres")
-export var lightning_curved_material : Material = preload("res://Lightning3DCurved.tres")
+export var lightning_material : Material = preload("res://addons/lightning/Lightning3D.tres")
+export var lightning_curved_material : Material = preload("res://addons/lightning/Lightning3DCurved.tres")
 export var meshs : Array
 export var width : float = 0.5 setget set_width
 export var n_points : int = 4.0
@@ -111,7 +111,7 @@ func create_curved_meshs():
 
 	# Create mesh surface from mesh array.
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr) # No blendshapes or compression used.
-	ResourceSaver.save("res://sphere.tres", array_mesh, 32)
+	ResourceSaver.save("res://addons/lightning/baked/sphere.tres", array_mesh, 32)
 	
 	# Create a visual instance (for 3D).
 	var instance = VisualServer.instance_create()

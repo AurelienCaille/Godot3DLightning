@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Godot3DLightning"
-run/main_scene="res://test.tscn"
+run/main_scene="res://addons/lightning/test.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
