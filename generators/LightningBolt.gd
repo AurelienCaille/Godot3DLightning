@@ -53,7 +53,7 @@ func _update_collisions() -> void:
 #Setup the visual lightning paths
 func _setup_lightning() -> void:
 	for i in raycasts.size():
-		var new_lightning = Lightning3D.new()
+		var new_lightning = Lightning3DBranched.new(7, 1.6, 3, 0.4, 0.6)
 		lightning_paths.append(new_lightning)
 		new_lightning.visible = false
 		add_child(new_lightning)
@@ -63,7 +63,7 @@ func _update_lightning() -> void:
 	for i in raycasts.size():
 		if collision_positions[i] != Vector3.ZERO or collision_positions[i] != null:
 			lightning_paths[i].visible = true
-			lightning_paths[i].set_points(previous_translation, collision_positions[i])
+			lightning_paths[i].set_end_from_global(collision_positions[i])
 		else:
 			lightning_paths[i].visible = false
 		lightning_paths[i].visible = true
@@ -84,6 +84,8 @@ func _physics_process(_delta):
 		_update_collisions()
 		previous_translation = translation
 
+func _process(_delta):
+	_update_lightning()
 
 
 
