@@ -36,7 +36,7 @@ var timer : SceneTreeTimer = null
 var cumulative_delta : float = 0.0
 
 func _setup_lightning():
-	for i in range(0, max_branches+1):
+	for _i in range(0, max_branches+1):
 		var new_lightning = Lightning3DSimple.new()
 		add_child(new_lightning)
 		lightning_nodes.append(new_lightning)
@@ -53,7 +53,7 @@ func _update_lightning():
 		var current = lightning_nodes[i-1]
 		current.curve.clear_points()
 		current.visible = true
-		lightnings[key].invert()
+		#lightnings[key].invert()
 		for point in lightnings[key]:
 			current.curve.add_point(point)
 		i += 1
@@ -82,15 +82,20 @@ func create_lightning_points(local_origin, local_end, local_deviation) -> Array:
 func create_branches(main_path) -> void:
 	var branch_count : int = ceil(rand_range(0, max_branches))
 	for i in range(0, branch_count):
+		var start_index : int = clamp(rand_range(bias*(main_path.size()), main_path.size()), 0, main_path.size()-1)
 		var local_end : Vector3 = Vector3(randf(), randf(), randf())
 		var branch_path : Array = create_lightning_points(
-			main_path[rand_range(0, main_path.size() - 1)], 
-			local_end * (increments * rand_range(2,4)), 
+			main_path[start_index],
+			#main_path[start_index]+local_end * (increments * rand_range(lighnting_subdivisions/3,lighnting_subdivisions/2)), 
+			end + Vector3(rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation)),
 			max_branch_deviation)
+		branch_path.invert()
 		lightnings[i] = branch_path
 
 func _update() -> void:
 	var main_path : Array = create_lightning_points(origin, end, max_deviation)
+	main_path.invert()
+	lightnings.clear()
 	lightnings["main"] = main_path
 	create_branches(main_path)
 	_update_lightning()
