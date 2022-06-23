@@ -4,11 +4,11 @@
 
 [node name="Lightning3DBranched" type="Spatial"]
 script = ExtResource( 1 )
-bias = 0.106
+bias = 0.0
 origin = Vector3( 15.728, 8.678, 1 )
 end = Vector3( -20, 10, 1 )
 lighnting_subdivisions = 12
-max_branches = 6
+max_branches = 17
 max_deviation = 0.816
 max_branch_deviation = 1.195
 update_mode = 2

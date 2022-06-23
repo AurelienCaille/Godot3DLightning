@@ -11,6 +11,8 @@ enum UPDATE_MODE{
 
 export(float, 0.0, 1.0) var bias : float = 0.5 #Controls at what point the lightning will branch
 
+export(bool) var branches_to_end : bool = true #If true, the lightning will branch to the end of the line
+
 export(Vector3) var origin : Vector3 = Vector3(0,0,0) #The origin point of the lightning
 
 export(Vector3) var end : Vector3 = Vector3(0,0,1) #The end point of the lightning
@@ -81,13 +83,18 @@ func create_lightning_points(local_origin, local_end, local_deviation) -> Array:
 #Create branches for the lightning
 func create_branches(main_path) -> void:
 	var branch_count : int = ceil(rand_range(0, max_branches))
+	var endpoint
 	for i in range(0, branch_count):
 		var start_index : int = clamp(rand_range(bias*(main_path.size()), main_path.size()), 0, main_path.size()-1)
 		var local_end : Vector3 = Vector3(randf(), randf(), randf())
+		if branches_to_end:
+			endpoint = origin + Vector3(rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation))
+		else:
+			endpoint = main_path[start_index]+local_end * (increments * max_branch_deviation)
+			#endpoint = main_path[start_index]+local_end * (increments * rand_range(lighnting_subdivisions/4,lighnting_subdivisions/3))
 		var branch_path : Array = create_lightning_points(
 			main_path[start_index],
-			#main_path[start_index]+local_end * (increments * rand_range(lighnting_subdivisions/3,lighnting_subdivisions/2)), 
-			end + Vector3(rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation)),
+			endpoint,
 			max_branch_deviation)
 		branch_path.invert()
 		lightnings[i] = branch_path
