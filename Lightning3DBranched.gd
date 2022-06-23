@@ -48,11 +48,12 @@ func _setup_lightning():
 func _update_lightning():
 	for light in lightning_nodes:
 		light.visible = false
-	var i = 1
+	var i = 0
+	lightning_nodes.shuffle()
 	for key in lightnings.keys():
 		if i > lightning_nodes.size():
 			break
-		var current = lightning_nodes[i-1]
+		var current = lightning_nodes[i]
 		current.curve.clear_points()
 		current.visible = true
 		#lightnings[key].invert()
@@ -82,16 +83,16 @@ func create_lightning_points(local_origin, local_end, local_deviation) -> Array:
 
 #Create branches for the lightning
 func create_branches(main_path) -> void:
-	var branch_count : int = ceil(rand_range(0, max_branches))
+	var branch_count : int = max_branches#ceil(rand_range(0, max_branches))
 	var endpoint
 	for i in range(0, branch_count):
 		var start_index : int = clamp(rand_range(bias*(main_path.size()), main_path.size()), 0, main_path.size()-1)
-		var local_end : Vector3 = Vector3(randf(), randf(), randf())
+		var local_end : Vector3 = Vector3(rand_range(-0.5,0.5), rand_range(-0.5,0.5), rand_range(-0.5,0.5))
 		if branches_to_end:
 			endpoint = origin + Vector3(rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation))
 		else:
-			endpoint = main_path[start_index]+local_end * (increments * max_branch_deviation)
-			#endpoint = main_path[start_index]+local_end * (increments * rand_range(lighnting_subdivisions/4,lighnting_subdivisions/3))
+			#endpoint = main_path[start_index]+local_end * (increments*lighnting_subdivisions)
+			endpoint = main_path[start_index]+ (local_end * (increments * rand_range(lighnting_subdivisions*0.55,lighnting_subdivisions*0.95)))
 		var branch_path : Array = create_lightning_points(
 			main_path[start_index],
 			endpoint,
@@ -105,7 +106,7 @@ func _update() -> void:
 	lightnings.clear()
 	lightnings["main"] = main_path
 	create_branches(main_path)
-	_update_lightning()
+	
 	
 func _ready():
 	if update_mode == UPDATE_MODE.ON_TIMEOUT:
@@ -123,6 +124,7 @@ func _process(delta):
 		if cumulative_delta > maximum_update_delta:
 			cumulative_delta = 0.0
 			_update()
+	_update_lightning()
 
 func _physics_process(delta):
 	if update_mode == UPDATE_MODE.ON_PHYSICS:

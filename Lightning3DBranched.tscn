@@ -3,14 +3,14 @@
 [ext_resource path="res://Lightning3DBranched.gd" type="Script" id=1]
 
 [node name="Lightning3DBranched" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, 0 )
 script = ExtResource( 1 )
-bias = 0.0
-origin = Vector3( 15.728, 8.678, 1 )
+bias = 0.053
+origin = Vector3( 50, 8.678, 1 )
 end = Vector3( -20, 10, 1 )
-lighnting_subdivisions = 12
-max_branches = 17
-max_deviation = 0.816
-max_branch_deviation = 1.195
+max_branches = 10
+max_deviation = 2.022
+max_branch_deviation = 5.24
 update_mode = 2
-update_timeout = 0.0
+update_timeout = 0.265
 maximum_update_delta = 0.1
