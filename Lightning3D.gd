@@ -2,6 +2,8 @@ tool
 
 extends Path
 
+class_name Lightning3D
+
 export(String, "Plane", "Curved") var lightning_mode = "Plane"
 export var bake : bool = false setget set_bake
 export var lightning_material : Material = preload("res://Lightning3D.tres")

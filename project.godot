@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Position3D",
+"class": "LighningGeneratorBolt",
+"language": "GDScript",
+"path": "res://generators/LightningBolt.gd"
+}, {
+"base": "Path",
+"class": "Lightning3D",
+"language": "GDScript",
+"path": "res://Lightning3D.gd"
+} ]
+_global_script_class_icons={
+"LighningGeneratorBolt": "",
+"Lightning3D": ""
+}
+
 [application]
 
 config/name="Godot3DLightning"
@@ -16,7 +32,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/scatter/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [physics]
 
