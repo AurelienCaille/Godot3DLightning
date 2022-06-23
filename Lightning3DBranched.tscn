@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Lightning3DBranched.gd" type="Script" id=1]
+
+[node name="Lightning3DBranched" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37845, 0 )
+script = ExtResource( 1 )
+bias = 0.139
+origin = Vector3( 1, 2.281, 1 )
+end = Vector3( -3.091, -10.499, 1 )
+lighnting_subdivisions = 9
+max_deviation = 0.748
+max_branch_deviation = 0.328
+update_mode = 2
+update_timeout = 0.084
+maximum_update_delta = 0.509

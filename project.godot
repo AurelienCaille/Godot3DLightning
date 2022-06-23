@@ -14,14 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://generators/LightningBolt.gd"
 }, {
+"base": "Spatial",
+"class": "Lightning3DBranched",
+"language": "GDScript",
+"path": "res://Lightning3DBranched.gd"
+}, {
 "base": "Path",
-"class": "Lightning3D",
+"class": "Lightning3DSimple",
 "language": "GDScript",
 "path": "res://Lightning3D.gd"
 } ]
 _global_script_class_icons={
 "LighningGeneratorBolt": "",
-"Lightning3D": ""
+"Lightning3DBranched": "",
+"Lightning3DSimple": ""
 }
 
 [application]

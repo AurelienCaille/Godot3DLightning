@@ -2,7 +2,7 @@ tool
 
 extends Path
 
-class_name Lightning3D
+class_name Lightning3DSimple
 
 export(String, "Plane", "Curved") var lightning_mode = "Plane"
 export var bake : bool = false setget set_bake
@@ -27,7 +27,7 @@ func set_width(new_width):
 func creates_meshs():
 	#Clean old meshs
 	clean_meshs()
-	print("plup")
+	#print("plup")
 	
 	if not is_inside_tree():
 		return
