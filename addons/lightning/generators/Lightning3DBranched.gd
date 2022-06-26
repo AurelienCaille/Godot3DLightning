@@ -27,9 +27,9 @@ export(float, 0.0, 10.0) var max_branch_deviation : float = 1.0 #The maximum dev
 
 export(UPDATE_MODE) var update_mode : int = UPDATE_MODE.ON_TIMEOUT #The update mode of the lightning
 
-export(float, 0.0, 10.0) var update_timeout : float = 0.1 #The update timeout of the lightning
+export(float, 0.01, 10.0) var update_timeout : float = 0.1 #The update timeout of the lightning
 
-export(float, 0.1, 100.0 ) var maximum_update_delta : float = 1.0 #The maximum delta cumulative before update
+export(float, 0.01, 100.0 ) var maximum_update_delta : float = 1.0 #The maximum delta cumulative before update
 
 var lightnings : Dictionary = {}
 var lightning_nodes : Array = []
