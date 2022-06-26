@@ -6,7 +6,7 @@ class_name Lightning3DSimple
 
 export(String, "Plane", "Curved") var lightning_mode = "Plane"
 export var bake : bool = false setget set_bake
-export var lightning_material : Material = preload("res://Lightning3D.tres")
+export var lightning_material : Material = preload("res://addons/lightning/baked/Lightning3D.tres")
 export var meshs : Array
 export var width : float = 0.5 setget set_width
 

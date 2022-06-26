@@ -15,7 +15,7 @@ export(bool) var branches_to_end : bool = true #If true, the lightning will bran
 
 export(Vector3) var origin : Vector3 = Vector3(0,0,0) #The origin point of the lightning
 
-export(Vector3) var end : Vector3 = Vector3(0,0,0) #The end point of the lightning
+export(Vector3) var end : Vector3 = Vector3(0,10,0) #The end point of the lightning
 
 export(int, 2, 100) var lighnting_subdivisions : int = 10 #The number of subdivisions of the lightning
 
@@ -38,7 +38,12 @@ var timer : SceneTreeTimer = null
 var cumulative_delta : float = 0.0
 
 
-func _init(init_lightning_subdivisions, init_max_deviation, init_max_branches, init_max_branch_deviation, init_bias, init_update_mode = UPDATE_MODE.ON_PROCESS):
+func _init(init_lightning_subdivisions = 10, 
+	init_max_deviation = 1.0, 
+	init_max_branches = 5,
+	init_max_branch_deviation = 1.0,
+	init_bias = 0.7, 
+	init_update_mode = UPDATE_MODE.ON_PROCESS):
 	self.lighnting_subdivisions = init_lightning_subdivisions
 	self.max_deviation = init_max_deviation
 	self.max_branches = init_max_branches

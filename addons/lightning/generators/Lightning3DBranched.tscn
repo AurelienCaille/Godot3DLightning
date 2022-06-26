@@ -5,12 +5,12 @@
 [node name="Lightning3DBranched" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, 0 )
 script = ExtResource( 1 )
-bias = 0.053
+bias = 0.336
 origin = Vector3( 50, 8.678, 1 )
 end = Vector3( -20, 10, 1 )
-max_branches = 2
-max_deviation = 2.022
-max_branch_deviation = 5.24
+max_branches = 3
+max_deviation = 2.553
+max_branch_deviation = 2.316
 update_mode = 1
 update_timeout = 0.265
 maximum_update_delta = 0.1
