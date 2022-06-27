@@ -27,7 +27,6 @@ func set_width(new_width):
 func creates_meshs():
 	#Clean old meshs
 	clean_meshs()
-	#print("plup")
 	
 	if not is_inside_tree():
 		return
