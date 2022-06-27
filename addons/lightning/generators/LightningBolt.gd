@@ -1,6 +1,7 @@
 #Lightning generator, used to generate lightning bolts
 #The lightning bolt is a series of lines that are drawn 
 #between the Position3D and random ray collisions
+tool
 extends Position3D
 class_name LighningGeneratorBolt
 
@@ -74,6 +75,7 @@ func _ready() -> void:
 	randomize()
 	_cast_rays()
 	_ray_setup()
+	_setup_lightning()
 	_update_collisions()
 
 #Update the bolt position and collision positions
