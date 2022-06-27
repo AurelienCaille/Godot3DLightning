@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/lightning/baked/Lightning3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/lightning/baked/test.gd" type="Script" id=2]
-
+[ext_resource path="res://addons/lightning/generators/Lightning3DBranched.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -17,13 +17,13 @@ size = Vector2( 1, 14.2372 )
 size = Vector2( 1, 18.4288 )
 
 [sub_resource type="PlaneMesh" id=4]
-size = Vector2( 1, 9.46681 )
+size = Vector2( 1, 9.46679 )
 
 [sub_resource type="PlaneMesh" id=5]
 size = Vector2( 1, 14.7852 )
 
 [sub_resource type="PlaneMesh" id=6]
-size = Vector2( 1, 7.24933 )
+size = Vector2( 1, 7.2493 )
 
 [sub_resource type="PlaneMesh" id=7]
 size = Vector2( 1, 26.0717 )
@@ -55,5 +55,8 @@ pressed = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Lightning3DBranched" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, -6.38788 )
 
 [connection signal="toggled" from="CanvasLayer/CheckButton" to="." method="_on_CheckButton_toggled"]
