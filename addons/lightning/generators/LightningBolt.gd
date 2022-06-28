@@ -17,7 +17,7 @@ var raycasts : Array = [] #List of raycasts
 var collision_positions : Array = [] #List of collision positions
 var lightning_paths : Array = [] #List of lightning paths
 
-onready var previous_translation : Vector3 = translation #Previous position of the bolt
+onready var previous_translation : Vector3 = global_transform.origin #Previous position of the bolt
 var translation_delta : Vector3 = Vector3() #Delta of the bolt position
 
 #Create raycasts
@@ -43,8 +43,10 @@ func _ray_add_exception(object : PhysicsBody) -> void:
 func _cast_rays() -> void:
 	for ray in raycasts:
 		ray.cast_to = Vector3(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0), rand_range(-1.0, 1.0))
-		ray.cast_to.normalize()
+		ray.cast_to = ray.cast_to.normalized()
 		ray.cast_to *= max_ray_length
+		ray.force_raycast_update()
+		
 
 #Update the lighning collision positions
 func _update_collisions() -> void:
@@ -80,11 +82,11 @@ func _ready() -> void:
 
 #Update the bolt position and collision positions
 func _physics_process(_delta):
-	translation_delta = translation - previous_translation
+	translation_delta = global_transform.origin - previous_translation
 	if translation_delta.length() > bolt_position_max_delta:
 		_cast_rays()
 		_update_collisions()
-		previous_translation = translation
+		previous_translation = global_transform.origin
 
 func _process(_delta):
 	_update_lightning()
