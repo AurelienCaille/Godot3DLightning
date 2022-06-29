@@ -1,0 +1,62 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://addons/lightning/baked/Lightning3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/lightning/baked/test.gd" type="Script" id=2]
+[ext_resource path="res://addons/lightning/generators/Lightning3DBranched.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -15.5168, 3.2063, 26.913, 0, 0, 0, 0, 0, 0, -16.3115, 11.3305, 15.2484, 0, 0, 0, 0, 0, 0, -4.82404, -3.07845, 15.0447, 0, 0, 0, 0, 0, 0, -6.29139, -6.5274, 23.7379, 0, 0, 0, 0, 0, 0, -14.8137, -1.7551, 34.8373, 0, 0, 0, 0, 0, 0, -15.3149, -4.22613, 41.634, 0, 0, 0, 0, 0, 0, -7.06017, -18.3217, 21.3139, 0, 0, 0, 0, 0, 0, -10.7353, -16.7572, 3.55405, 0, 0, 0, 0, 0, 0, -10.2182, -18.5303, -2.78382 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 1, 14.2372 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 1, 18.4288 )
+
+[sub_resource type="PlaneMesh" id=4]
+size = Vector2( 1, 9.46679 )
+
+[sub_resource type="PlaneMesh" id=5]
+size = Vector2( 1, 14.7852 )
+
+[sub_resource type="PlaneMesh" id=6]
+size = Vector2( 1, 7.2493 )
+
+[sub_resource type="PlaneMesh" id=7]
+size = Vector2( 1, 26.0717 )
+
+[sub_resource type="PlaneMesh" id=8]
+size = Vector2( 1, 18.2035 )
+
+[sub_resource type="PlaneMesh" id=9]
+size = Vector2( 1, 6.6015 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.199351, -0.415174, 0.887632, 0, 0.905813, 0.423678, -0.979928, -0.0844605, 0.180575, 26.7157, 15.0899, 8.07141 )
+
+[node name="Lightning3D" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.18489, 0, -8.75149 )
+curve = SubResource( 1 )
+meshs = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ]
+width = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
+margin_right = 76.0
+margin_bottom = 40.0
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lightning3DBranched" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, -6.38788 )
+
+[connection signal="toggled" from="CanvasLayer/CheckButton" to="." method="_on_CheckButton_toggled"]

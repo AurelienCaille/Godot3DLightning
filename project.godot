@@ -8,10 +8,32 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Position3D",
+"class": "LighningGeneratorBolt",
+"language": "GDScript",
+"path": "res://addons/lightning/generators/LightningBolt.gd"
+}, {
+"base": "Spatial",
+"class": "Lightning3DBranched",
+"language": "GDScript",
+"path": "res://addons/lightning/generators/Lightning3DBranched.gd"
+}, {
+"base": "Path",
+"class": "Lightning3DSimple",
+"language": "GDScript",
+"path": "res://addons/lightning/baked/Lightning3D.gd"
+} ]
+_global_script_class_icons={
+"LighningGeneratorBolt": "",
+"Lightning3DBranched": "",
+"Lightning3DSimple": ""
+}
+
 [application]
 
 config/name="Godot3DLightning"
-run/main_scene="res://addons/lightning/test.tscn"
+run/main_scene="res://addons/lightning/baked/test.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
@@ -21,7 +43,3 @@ enabled=PoolStringArray(  )
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"
