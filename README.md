@@ -14,6 +14,7 @@ Generator provide various VFX effects
 
 ## Bolt
 
+Bolt uses raycast to have "physic" collision with lightning
 
 https://user-images.githubusercontent.com/22189681/182611816-4cf06ce1-652c-4e83-a3dc-c346b2d393d2.mp4
 
