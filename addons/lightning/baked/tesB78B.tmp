@@ -1,0 +1,59 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5uv6jd01icmt"]
+
+[ext_resource type="PackedScene" path="res://addons/lightning/baked/Lightning3D.tscn" id="1"]
+[ext_resource type="Script" path="res://addons/lightning/baked/test.gd" id="2"]
+[ext_resource type="PackedScene" path="res://addons/lightning/generators/Lightning3DBranched.tscn" id="3"]
+
+[sub_resource type="Curve3D" id="1"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -15.5168, 3.2063, 26.913, 0, 0, 0, 0, 0, 0, -16.3115, 11.3305, 15.2484, 0, 0, 0, 0, 0, 0, -13.951, -3.38684, 8.59492, 0, 0, 0, 0, 0, 0, -6.29139, -6.5274, 23.7379, 0, 0, 0, 0, 0, 0, -14.8137, -1.7551, 34.8373, 0, 0, 0, 0, 0, 0, -15.3149, -4.22613, 41.634, 0, 0, 0, 0, 0, 0, -7.06017, -18.3217, 21.3139, 0, 0, 0, 0, 0, 0, -10.7353, -16.7572, 3.55405, 0, 0, 0, 0, 0, 0, -10.2182, -18.5303, -2.78382),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nihmd"]
+size = Vector2(1, 14.2372)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d1qk4"]
+size = Vector2(1, 16.323)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l5r56"]
+size = Vector2(1, 17.2581)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rk6yy"]
+size = Vector2(1, 14.7852)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cin4i"]
+size = Vector2(1, 7.2493)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1iy4i"]
+size = Vector2(1, 26.0717)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1u812"]
+size = Vector2(1, 18.2035)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k6tyl"]
+size = Vector2(1, 6.6015)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.199351, -0.415174, 0.887632, 0, 0.905813, 0.423678, -0.979928, -0.0844605, 0.180575, 26.7157, 15.0899, 8.07141)
+
+[node name="Lightning3D" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.18489, 0, -8.75149)
+curve = SubResource("1")
+meshs = [SubResource("PlaneMesh_nihmd"), SubResource("PlaneMesh_d1qk4"), SubResource("PlaneMesh_l5r56"), SubResource("PlaneMesh_rk6yy"), SubResource("PlaneMesh_cin4i"), SubResource("PlaneMesh_1iy4i"), SubResource("PlaneMesh_1u812"), SubResource("PlaneMesh_k6tyl")]
+width = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
+offset_right = 76.0
+offset_bottom = 40.0
+
+[node name="Lightning3DBranched" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, -6.38788)
+
+[connection signal="toggled" from="CanvasLayer/CheckButton" to="." method="_on_CheckButton_toggled"]

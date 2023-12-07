@@ -1,6 +1,6 @@
+@tool
 #Branched lightning generator, creates several simple lightnings 
-tool
-extends Spatial
+extends Node3D
 class_name Lightning3DBranched
 
 enum UPDATE_MODE{
@@ -9,27 +9,27 @@ enum UPDATE_MODE{
 	ON_PHYSICS
 }
 
-export(float, 0.0, 1.0) var bias : float = 0.5 #Controls at what point the lightning will branch
+@export var bias : float = 0.5 #Controls at what point the lightning will branch # (float, 0.0, 1.0)
 
-export(bool) var branches_to_end : bool = true #If true, the lightning will branch to the origin of the line
+@export var branches_to_end: bool = true #If true, the lightning will branch to the origin of the line
 
-export(Vector3) var origin : Vector3 = Vector3(0,0,0) #The origin point of the lightning
+@export var origin: Vector3 = Vector3(0,0,0) #The origin point of the lightning
 
-export(Vector3) var end : Vector3 = Vector3(0,10,0) #The end point of the lightning
+@export var end: Vector3 = Vector3(0,10,0) #The end point of the lightning
 
-export(int, 2, 100) var lighnting_subdivisions : int = 10 #The number of subdivisions of the lightning
+@export var lighnting_subdivisions : int = 10 #The number of subdivisions of the lightning # (int, 2, 100)
 
-export(int, 0, 100) var max_branches : int = 5 #The maximum number of branches
+@export var max_branches : int = 5 #The maximum number of branches # (int, 0, 100)
 
-export(float, 0.0, 10.0) var max_deviation : float = 1.0 #The maximum deviation of the lightning
+@export var max_deviation : float = 1.0 #The maximum deviation of the lightning # (float, 0.0, 10.0)
 
-export(float, 0.0, 10.0) var max_branch_deviation : float = 1.0 #The maximum deviation of the lightning's branches
+@export var max_branch_deviation : float = 1.0 #The maximum deviation of the lightning's branches # (float, 0.0, 10.0)
 
-export(UPDATE_MODE) var update_mode : int = UPDATE_MODE.ON_TIMEOUT #The update mode of the lightning
+@export var update_mode: UPDATE_MODE = UPDATE_MODE.ON_TIMEOUT #The update mode of the lightning
 
-export(float, 0.01, 10.0) var update_timeout : float = 0.1 #The update timeout of the lightning
+@export var update_timeout : float = 0.1 #The update timeout of the lightning # (float, 0.01, 10.0)
 
-export(float, 0.01, 100.0 ) var maximum_update_delta : float = 1.0 #The maximum delta cumulative before update
+@export var maximum_update_delta : float = 1.0 #The maximum delta cumulative before update # (float, 0.01, 100.0 )
 
 var lightnings : Dictionary = {}
 var lightning_nodes : Array = []
@@ -87,9 +87,9 @@ func _create_lightning_points(local_origin, local_end, local_deviation) -> Array
 	for _i in range(1, lighnting_subdivisions):
 		point = point + direction * increments
 		point += Vector3(
-			rand_range(-local_deviation, local_deviation),
-			rand_range(-local_deviation, local_deviation), 
-			rand_range(-local_deviation, local_deviation)
+			randf_range(-local_deviation, local_deviation),
+			randf_range(-local_deviation, local_deviation), 
+			randf_range(-local_deviation, local_deviation)
 			)
 		points.append(point)
 	points.pop_back()
@@ -98,33 +98,33 @@ func _create_lightning_points(local_origin, local_end, local_deviation) -> Array
 
 #Create branches for the lightning
 func _create_branches(main_path) -> void:
-	var branch_count : int = max_branches#ceil(rand_range(0, max_branches))
+	var branch_count : int = max_branches#ceil(randf_range(0, max_branches))
 	var endpoint
 	for i in range(0, branch_count):
-		var start_index : int = clamp(rand_range(bias*(main_path.size()), main_path.size()), 0, main_path.size()-1)
-		var local_end : Vector3 = Vector3(rand_range(-0.5,0.5), rand_range(-0.5,0.5), rand_range(-0.5,0.5))
+		var start_index : int = clamp(randf_range(bias*(main_path.size()), main_path.size()), 0, main_path.size()-1)
+		var local_end : Vector3 = Vector3(randf_range(-0.5,0.5), randf_range(-0.5,0.5), randf_range(-0.5,0.5))
 		if branches_to_end:
-			endpoint = end + Vector3(rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation), rand_range(-max_branch_deviation, max_branch_deviation))
+			endpoint = end + Vector3(randf_range(-max_branch_deviation, max_branch_deviation), randf_range(-max_branch_deviation, max_branch_deviation), randf_range(-max_branch_deviation, max_branch_deviation))
 		else:
 			#endpoint = main_path[start_index]+local_end * (increments*lighnting_subdivisions)
-			endpoint = main_path[start_index]+ (local_end * (increments * rand_range(lighnting_subdivisions*0.55,lighnting_subdivisions*0.95)))
+			endpoint = main_path[start_index]+ (local_end * (increments * randf_range(lighnting_subdivisions*0.55,lighnting_subdivisions*0.95)))
 		var branch_path : Array = _create_lightning_points(
 			main_path[start_index],
 			endpoint,
 			max_branch_deviation)
-		branch_path.invert()
+		branch_path.reverse()
 		lightnings[i] = branch_path
 
 func _update() -> void:
 	var main_path : Array = _create_lightning_points(end, origin, max_deviation)
-	main_path.invert()
+	main_path.reverse()
 	lightnings.clear()
 	lightnings["main"] = main_path
 	_create_branches(main_path)
 
 func _timer_update() -> void:
 	timer = get_tree().create_timer(update_timeout)
-	timer.connect("timeout", self, "_timer_update")
+	timer.connect("timeout", Callable(self, "_timer_update"))
 	_update()	
 	
 func _ready():

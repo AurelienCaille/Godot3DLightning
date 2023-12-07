@@ -1,11 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cl5whp03jqh5c"]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id="1"]
 code = "shader_type spatial;
 render_mode shadows_disabled, cull_disabled;
 
-uniform vec4 lightning_color: hint_color;
-uniform vec4 emission_color: hint_color;
+uniform vec4 lightning_color: source_color;
+uniform vec4 emission_color: source_color;
 
 uniform float size: hint_range (0.,1.);
 uniform float width: hint_range (0.,1.);
@@ -13,7 +13,6 @@ uniform float speed;
 uniform float cycle;
 uniform float ratio;
 uniform float time_shift;
-const float PI = 3.14159265359;
 
 float rand(float x){
 	return fract(sin(x)*100000.0);
@@ -47,12 +46,13 @@ void fragment(){
 "
 
 [resource]
-shader = SubResource( 1 )
-shader_param/lightning_color = Color( 0.0352941, 0.321569, 0.654902, 1 )
-shader_param/emission_color = Color( 0.76, 1.16, 1.73, 1 )
-shader_param/size = 0.093
-shader_param/width = 1.0
-shader_param/speed = 10.0
-shader_param/cycle = 1.0
-shader_param/ratio = 0.5
-shader_param/time_shift = 1.0
+render_priority = 0
+shader = SubResource("1")
+shader_parameter/lightning_color = Color(0.0352941, 0.321569, 0.654902, 1)
+shader_parameter/emission_color = Color(0.76, 1.16, 1.73, 1)
+shader_parameter/size = 0.093
+shader_parameter/width = 1.0
+shader_parameter/speed = 10.0
+shader_parameter/cycle = 1.0
+shader_parameter/ratio = 0.5
+shader_parameter/time_shift = 1.0

@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://h41bbuw4c71r"]
 
-[ext_resource path="res://addons/lightning/generators/Lightning3DBranched.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/lightning/generators/Lightning3DBranched.gd" id="1"]
 
-[node name="Lightning3DBranched" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, 0 )
-script = ExtResource( 1 )
+[node name="Lightning3DBranched" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, 0)
+script = ExtResource("1")
 bias = 0.336
-origin = Vector3( 50, 8.678, 1 )
-end = Vector3( -20, 10, 1 )
+origin = Vector3(50, 8.678, 1)
+end = Vector3(-20, 10, 1)
 max_branches = 3
 max_deviation = 2.553
 max_branch_deviation = 2.316
