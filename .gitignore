@@ -1,2 +1,5 @@
 
 *.cache
+.import/
+.godot/
+.git/
