@@ -1,3 +1,6 @@
+# /!\ WIP Update to Godot 4
+Godot 3 version for this addon will be deprecated, you can still use the Godot3(old) branch but it will no getting any update in the future
+
 # Godot3DLightning
 
 Godot 3D Lightning is an addon to create 3D VFX with lightning effect
