@@ -11,16 +11,16 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_hr8s0"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_5juxs"]
 size = Vector2(0.6, 12.8636)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_n21yf"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_5ulc7"]
 size = Vector2(0.6, 8.10328)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_mptxl"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_4uund"]
 size = Vector2(0.6, 13.1976)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_t4ekg"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_6gxvu"]
 size = Vector2(0.6, 8.03207)
 
 [node name="Node3D" type="Node3D"]
@@ -32,7 +32,7 @@ transform = Transform3D(0.199351, -0.415174, 0.887632, 0, 0.905813, 0.423678, -0
 [node name="Lightning3D" parent="." instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.18489, 0, -8.75149)
 curve = SubResource("Curve3D_ea111")
-meshs = [SubResource("PlaneMesh_hr8s0"), SubResource("PlaneMesh_n21yf"), SubResource("PlaneMesh_mptxl"), SubResource("PlaneMesh_t4ekg")]
+meshs = [SubResource("PlaneMesh_5juxs"), SubResource("PlaneMesh_5ulc7"), SubResource("PlaneMesh_4uund"), SubResource("PlaneMesh_6gxvu")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -40,7 +40,36 @@ meshs = [SubResource("PlaneMesh_hr8s0"), SubResource("PlaneMesh_n21yf"), SubReso
 offset_right = 76.0
 offset_bottom = 40.0
 
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_top = 40.0
+offset_right = 128.0
+offset_bottom = 232.0
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Instantiate Lightning3D"
+
+[node name="AddButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Add 10"
+
+[node name="AddButton2" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Add 100"
+
+[node name="AddButton3" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Add 1000"
+
+[node name="AddButton4" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Add 10 000"
+
 [node name="Lightning3DBranched" parent="." instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, -0.119894, -0.992787, 0, 0.992787, -0.119894, 0, 0, -6.38788)
 
 [connection signal="toggled" from="CanvasLayer/CheckButton" to="." method="_on_CheckButton_toggled"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/AddButton" to="." method="_on_add_button_pressed" binds= [10]]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/AddButton2" to="." method="_on_add_button_pressed" binds= [100]]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/AddButton3" to="." method="_on_add_button_pressed" binds= [1000]]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/AddButton4" to="." method="_on_add_button_pressed" binds= [10000]]

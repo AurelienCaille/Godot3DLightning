@@ -23,3 +23,10 @@ func _on_CheckButton_toggled(button_pressed):
 	else:
 		$Lightning3D.show()
 
+
+
+func _on_add_button_pressed(extra_arg_0: int) -> void:
+	for _i in range(extra_arg_0):
+		var new_lightning = preload("res://addons/lightning/baked/Lightning3D.tscn").instantiate()
+		new_lightning.curve = $Lightning3D.curve
+		add_child(new_lightning)
